@@ -14,7 +14,7 @@ router.get('/test', (req, res) => res.send('Student route testing!'));
 // @access Public
 router.get('/', (req, res) => {
   Student.find()
-    .then(Students => res.json(Student))
+    .then(Student => res.json(Student))
     .catch(err => res.status(404).json({ noStudentsfound: 'No Students found' }));
 });
 
@@ -32,7 +32,7 @@ router.get('/:id', (req, res) => {
 // @access Public
 router.post('/', (req, res) => {
   Student.create(req.body)
-    .then(Student => res.json({ msg: 'Student added successfully' }))
+    .then(Student => res.json({ msg: 'Student added successfully', Student }))
     .catch(err => res.status(400).json({ error: 'Unable to add this Student' }));
 });
 

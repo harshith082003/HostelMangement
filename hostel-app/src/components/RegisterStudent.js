@@ -1,15 +1,37 @@
 import React from 'react'
 import { useState } from 'react';
+import axios from 'axios';
 import { Center, Input, VStack, FormControl, FormLabel, Button, Select, Heading } from '@chakra-ui/react'
 export default function RegisterStudent() {
 
+ 
   const[phNo, setPhNo] = useState();
   const[name, setName] = useState();
   const[dob, setDob] = useState();
-  const[depatment, setDepartment] = useState('ISE');
+  const[department, setDepartment] = useState('ISE');
 
-  const handleClick = () => {
-    console.log(name, dob, depatment, phNo);
+  const handleClick = e => {
+    console.log(name, dob, department, phNo);
+
+    e.preventDefault();
+    const newStudent = {
+      name: name,
+      dob: dob,
+      phNo: phNo,
+      department: department
+    }
+
+    axios
+      .post('http://localhost:8082/api/students', newStudent)
+      .then((res) => {
+        setName('');
+        setDob('');
+        setDepartment('');
+        setPhNo('');        
+      })
+      .catch((err) => {
+        console.log(err.stack);
+      });
   }
 
   return (
@@ -44,7 +66,7 @@ export default function RegisterStudent() {
           <FormControl isRequired>
             <FormLabel>Department</FormLabel>
             <Select 
-              value={depatment}
+              value={department}
               onChange={e => setDepartment(e.target.value)}
               variant={'filled'}
               size={'lg'}
