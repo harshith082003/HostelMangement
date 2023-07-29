@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import { Center, Input, VStack, FormControl, FormLabel, Button, Select, Heading } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom';
 export default function RegisterStudent() {
 
  
@@ -11,6 +12,8 @@ export default function RegisterStudent() {
   const[department, setDepartment] = useState('ISE');
   const[room, setRoom] = useState();
   const[feeStatus, setFeeStatus] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleClick = e => {
     console.log(name, dob, department, phNo, room, feeStatus);
@@ -37,6 +40,8 @@ export default function RegisterStudent() {
       .catch((err) => {
         console.log(err.stack);
       });
+
+      navigate('/studentList')
   }
 
   return (

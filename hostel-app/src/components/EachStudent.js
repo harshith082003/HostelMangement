@@ -1,5 +1,5 @@
 import React, {  useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {Box, Heading, Card, CardBody, CardHeader, Stack, StackDivider, Button, HStack, Spacer, Badge } from '@chakra-ui/react'
 import StudentField from './StudentField';
@@ -10,7 +10,7 @@ export default function EachStudent() {
     const[student, setStudent] = useState({});
 
     const { id } = useParams();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios
@@ -23,6 +23,17 @@ export default function EachStudent() {
         });
       }, [id]);
 
+
+      const handleVacate = (id) => {
+        axios
+          .delete(`http://localhost:8082/api/students/${id}`)
+          .then((res) => {
+            navigate('/studentList');
+          })
+          .catch((err) => {
+            console.log('Error form ShowBookDetails_deleteClick');
+          });
+      };
 
   return (
     <Box>
@@ -57,8 +68,9 @@ export default function EachStudent() {
       </Card>
       <HStack m={5}>
         <EditStudent/>
+        <Button colorScheme='red' marginLeft={10} onClick={() => handleVacate(student._id)}>Vacate</Button>
         <Link to={'/studentList'}>
-          <Button colorScheme='red' marginLeft={10}>Close</Button>
+          <Button colorScheme='red' marginLeft={10} variant={'outline'}>Close</Button>
         </Link>
         
       </HStack>
