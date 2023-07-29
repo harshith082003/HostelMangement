@@ -30,13 +30,13 @@ export default function EditStudent() {
       phNo: phNo,
       department: department,
       room: room,
-      feeStatus: true
+      feeStatus: feeStatus == '0' ? false : true
     }
 
     axios
       .put(`http://localhost:8082/api/students/${id}`, editededStudent)
       .then((res) => {
-        navigate(`/eachStudent/${id}`);
+        navigate(`/studentList`);
       })
       .catch((err) => {
         console.log('Error in UpdateBookInfo!');
@@ -129,9 +129,9 @@ export default function EditStudent() {
                         width={'80'}
                         />
                     </FormControl>
-                    <RadioGroup defaultValue={feeStatus}>
+                    <RadioGroup defaultValue={feeStatus} onChange={setFeeStatus}>
                       <Stack spacing={5} direction='row'>
-                        <Radio colorScheme='red' value='0'>
+                        <Radio colorScheme='red' value='0' onC>
                           Due
                         </Radio>
                         <Radio colorScheme='green' value='1'>

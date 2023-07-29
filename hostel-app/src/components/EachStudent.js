@@ -1,7 +1,7 @@
 import React, {  useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import {Box, Heading, Card, CardBody, CardHeader, Stack, StackDivider, Button, HStack, Spacer } from '@chakra-ui/react'
+import {Box, Heading, Card, CardBody, CardHeader, Stack, StackDivider, Button, HStack, Spacer, Badge } from '@chakra-ui/react'
 import StudentField from './StudentField';
 import EditStudent from './EditStudent';
 
@@ -37,7 +37,21 @@ export default function EachStudent() {
             <StudentField field={'DOB'} data = {student.dob}/>
             <StudentField field={'Phone No'} data = {student.phNo}/>
             <StudentField field={'Department'} data = {student.department}/>
-            <StudentField field={'Fee Status'} data = {student.feeStatus ? 'Paid' : 'Due'}/>
+            <Box>
+                <Heading size='md' >
+                    Fee Status
+                </Heading>
+                {student.feeStatus ?
+                    <Badge mt={3} fontSize='lg' colorScheme='green' variant={'solid'}>
+                        Paid
+                    </Badge>
+                    :
+                    <Badge mt={3} fontSize='lg' colorScheme='red' variant={'solid'}>
+                        Due
+                    </Badge>
+                }
+                
+            </Box>          
           </Stack>
         </CardBody>
       </Card>
