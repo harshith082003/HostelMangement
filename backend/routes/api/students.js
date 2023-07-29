@@ -14,7 +14,7 @@ router.get('/test', (req, res) => res.send('Student route testing!'));
 // @access Public
 router.get('/', (req, res) => {
   Student.find()
-    .then(Student => res.json(Student))
+    .then(students => res.json(students))
     .catch(err => res.status(404).json({ noStudentsfound: 'No Students found' }));
 });
 
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 // @access Public
 router.get('/:id', (req, res) => {
   Student.findById(req.params.id)
-    .then(Student => res.json(Student))
+    .then(student => res.json(student))
     .catch(err => res.status(404).json({ noStudentfound: 'No Student found' }));
 });
 

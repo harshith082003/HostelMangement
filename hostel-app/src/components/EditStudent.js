@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerHeader, DrawerContent, DrawerOverlay, useDisclosure, DrawerFooter, Input, FormControl, FormLabel } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerHeader, DrawerContent, DrawerOverlay, useDisclosure, DrawerFooter, Input, FormControl, FormLabel, Radio, RadioGroup, Select, Stack } from '@chakra-ui/react';
 
 export default function EditStudent() {
 
@@ -7,12 +9,39 @@ export default function EditStudent() {
     const firstField = React.useRef();
 
     const[phNo, setPhNo] = useState();
-    const[roomNo, setRoomNo] = useState();
     const[name, setName] = useState();
     const[dob, setDob] = useState();
+    const[department, setDepartment] = useState('ISE');
+    const[room, setRoom] = useState();
+    const[feeStatus, setFeeStatus] = useState('0');
+  
 
-    const handleEdit = () => {
-        console.log(name, roomNo, phNo, dob);
+    const { id } = useParams();
+    const navigate = useNavigate();
+
+    
+    const handleEdit = e => {
+
+      e.preventDefault();
+
+      const editededStudent = {
+      name: name,
+      dob: dob,
+      phNo: phNo,
+      department: department,
+      room: room,
+      feeStatus: true
+    }
+
+    axios
+      .put(`http://localhost:8082/api/students/${id}`, editededStudent)
+      .then((res) => {
+        navigate(`/eachStudent/${id}`);
+      })
+      .catch((err) => {
+        console.log('Error in UpdateBookInfo!');
+      });
+
     }
 
     return (
@@ -60,6 +89,23 @@ export default function EditStudent() {
                         />
                     </FormControl>
                     <FormControl isRequired>
+                      <FormLabel>Department</FormLabel>
+                      <Select 
+                        value={department}
+                        onChange={e => setDepartment(e.target.value)}
+                        variant={'filled'}
+                        size={'lg'}
+                        width={'80'}              
+                      >
+                        <option>ISE</option>
+                        <option>CSE</option>
+                        <option>ECE</option>
+                        <option>EEE</option>
+                        <option>CV</option>
+                        <option>MECH</option>
+                      </Select>
+                    </FormControl>
+                    <FormControl isRequired>
                         <FormLabel>Phone No</FormLabel>
                         <Input  
                         value={phNo || ''}
@@ -74,8 +120,8 @@ export default function EditStudent() {
                     <FormControl isRequired>
                         <FormLabel>Room No</FormLabel>
                         <Input  
-                        value={roomNo || ''}
-                        onChange={e => setRoomNo(e.target.value)}
+                        value={room || ''}
+                        onChange={e => setRoom(e.target.value)}
                         size={'lg'}
                         type='number'
                         placeholder='Enter new room no' 
@@ -83,6 +129,16 @@ export default function EditStudent() {
                         width={'80'}
                         />
                     </FormControl>
+                    <RadioGroup defaultValue={feeStatus}>
+                      <Stack spacing={5} direction='row'>
+                        <Radio colorScheme='red' value='0'>
+                          Due
+                        </Radio>
+                        <Radio colorScheme='green' value='1'>
+                          Paid
+                        </Radio>
+                      </Stack>
+                    </RadioGroup>
               </DrawerBody>
               
               <DrawerFooter borderTopWidth='1px'>

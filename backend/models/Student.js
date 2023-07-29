@@ -13,9 +13,19 @@ const studentSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  depatment: {
-    type: String
+  department: {
+    type: String,
+    requird: true
   },
+  room: {
+    type: Number,
+    required: true
+  },
+  feeStatus: {
+    type: Number,
+    required: true
+  },
+  
 });
 
 module.exports = Student = mongoose.model('student', studentSchema);

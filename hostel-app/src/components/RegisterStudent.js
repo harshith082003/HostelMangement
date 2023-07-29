@@ -9,16 +9,20 @@ export default function RegisterStudent() {
   const[name, setName] = useState();
   const[dob, setDob] = useState();
   const[department, setDepartment] = useState('ISE');
+  const[room, setRoom] = useState();
+  const[feeStatus, setFeeStatus] = useState(false);
 
   const handleClick = e => {
-    console.log(name, dob, department, phNo);
+    console.log(name, dob, department, phNo, room, feeStatus);
 
     e.preventDefault();
     const newStudent = {
       name: name,
       dob: dob,
       phNo: phNo,
-      department: department
+      department: department,
+      room: room,
+      feeStatus: true
     }
 
     axios
@@ -27,7 +31,8 @@ export default function RegisterStudent() {
         setName('');
         setDob('');
         setDepartment('');
-        setPhNo('');        
+        setPhNo('');      
+        setRoom();  
       })
       .catch((err) => {
         console.log(err.stack);
@@ -88,6 +93,18 @@ export default function RegisterStudent() {
               size={'lg'}
               type='number'
               placeholder='Phone no' 
+              variant={'filled'} 
+              width={'80'}
+            />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel>Room No</FormLabel>
+            <Input  
+              value={room || ''}
+              onChange={e => setRoom(e.target.value)}
+              size={'lg'}
+              type='number'
+              placeholder='Room no' 
               variant={'filled'} 
               width={'80'}
             />
