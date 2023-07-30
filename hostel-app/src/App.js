@@ -4,6 +4,7 @@ import RegisterStudent from './components/RegisterStudent';
 import StudentList from "./components/StudentList";
 import EachStudent from "./components/EachStudent";
 import EditStudent from "./components/EditStudent";
+import NavBar from "./components/NavBar";
 
 
 function App() {
@@ -11,7 +12,6 @@ function App() {
     <Router>
       <Box >
         <Routes>
-          <Route exact path = '/' element = {<RegisterStudent/>}/>
           <Route exact path = '/studentList' element = {<StudentList/>}/>
           <Route path = '/register' element = {<RegisterStudent/>}/>
           <Route path = '/eachStudent/:id' element = {<EachStudent/>} />

@@ -6,6 +6,11 @@ const roomSchema = mongoose.Schema({
         required: true,
         ref: 'Student'
     },
+    // roomNo: {
+    //     type: Number,
+    //     required: true,
+    //     ref: 
+    // },
     capacity: {
         type: Number,
         required: true

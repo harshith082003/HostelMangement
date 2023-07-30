@@ -3,6 +3,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Center, Input, VStack, FormControl, FormLabel, Button, Select, Heading, useToast } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
+import NavBar from './NavBar';
+
 export default function RegisterStudent() {
 
  
@@ -16,7 +18,9 @@ export default function RegisterStudent() {
   const navigate = useNavigate();
   const toast = useToast();
 
-  const handleClick = e => {
+  // const Room = require('../../../backend/models/Room');
+
+  const handleSubmit = e => {
     console.log(name, dob, department, phNo, room, feeStatus);
 
 
@@ -55,7 +59,9 @@ export default function RegisterStudent() {
   }
 
   return (
-      <Center mt={20}>
+    <>
+    <NavBar/>
+      <Center mt={5}>
         <VStack spacing={5} border={'2px'} borderRadius={10} p = {5} borderColor={'blue.100'}>
           <Heading fontSize={40} textAlign={'center'}>Student Registeration</Heading>
           <FormControl isRequired>
@@ -124,8 +130,9 @@ export default function RegisterStudent() {
               width={'80'}
             />
           </FormControl>
-          <Button colorScheme='blue' onClick={handleClick}>Submit</Button>
+          <Button colorScheme='blue' onClick={handleSubmit}>Submit</Button>
         </VStack>
       </Center>
+      </>
   )
 }

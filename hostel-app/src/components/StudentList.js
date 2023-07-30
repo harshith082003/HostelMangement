@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Center, Heading, Spacer, Text, Flex, List, Badge, Divider, OrderedList, HStack, Th, Tr, Td,TableContainer, Table, Thead, Tbody, AbsoluteCenter, useToast} from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
+import NavBar from './NavBar';
+
 export default function StudentList() {
     
   const[students, setStudents] = useState([]);
@@ -51,9 +53,11 @@ export default function StudentList() {
     })
 
   return (
-    
-      students.length ?
-      <TableContainer>
+    <>
+    <NavBar/>
+      
+      {students.length ?
+      <TableContainer ml={5}>
         <Heading textAlign={'center'} m={10}>Student List</Heading>
         <Table size={'lg'}>
           <Thead>
@@ -83,7 +87,7 @@ export default function StudentList() {
         </Link>
         
       </AbsoluteCenter>
-    
-    
+    }
+      </>
   )
 }

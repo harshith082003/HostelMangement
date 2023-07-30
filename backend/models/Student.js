@@ -15,13 +15,9 @@ const studentSchema = new mongoose.Schema({
   },
   department: {
     type: String,
-    requird: true
+    required: true
   },
-  room_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'Room'
-  },
+ 
   room: {
     type: Number,
     required: true
