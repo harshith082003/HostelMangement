@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
-import { Center, Input, VStack, FormControl, FormLabel, Button, Select, Heading } from '@chakra-ui/react'
+import { Center, Input, VStack, FormControl, FormLabel, Button, Select, Heading, useToast } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
 export default function RegisterStudent() {
 
@@ -14,9 +14,11 @@ export default function RegisterStudent() {
   const[feeStatus, setFeeStatus] = useState(false);
 
   const navigate = useNavigate();
+  const toast = useToast();
 
   const handleClick = e => {
     console.log(name, dob, department, phNo, room, feeStatus);
+
 
     e.preventDefault();
     const newStudent = {
@@ -41,7 +43,15 @@ export default function RegisterStudent() {
         console.log(err.stack);
       });
 
-      navigate('/studentList')
+      toast({
+        title: 'Student registered.',
+        description: `Student allocated to room no ${room}.`,
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+
+      setTimeout(navigate('/studentList'), 9000);      
   }
 
   return (

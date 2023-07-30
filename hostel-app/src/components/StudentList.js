@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Center, Heading, Spacer, Text, Flex, List, Badge, Divider, OrderedList, HStack, Th, Tr, Td,TableContainer, Table, Thead, Tbody, AbsoluteCenter} from '@chakra-ui/react'
+import { Button, Center, Heading, Spacer, Text, Flex, List, Badge, Divider, OrderedList, HStack, Th, Tr, Td,TableContainer, Table, Thead, Tbody, AbsoluteCenter, useToast} from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
 export default function StudentList() {
     
+  const[students, setStudents] = useState([]);
 
-    const[students, setStudents] = useState([]);
+    
 
     useEffect(() => {
         axios
@@ -16,6 +17,8 @@ export default function StudentList() {
           .catch((err) => {
             console.log('Error from StudentList: ', err.message);
           });
+
+          
       }, []);
         
 

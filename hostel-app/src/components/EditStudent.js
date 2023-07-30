@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerHeader, DrawerContent, DrawerOverlay, useDisclosure, DrawerFooter, Input, FormControl, FormLabel, Radio, RadioGroup, Select, Stack } from '@chakra-ui/react';
+import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerHeader, DrawerContent, DrawerOverlay, useDisclosure, DrawerFooter, Input, FormControl, FormLabel, Radio, RadioGroup, Select, Stack, useToast } from '@chakra-ui/react';
 
 export default function EditStudent() {
 
@@ -18,22 +18,26 @@ export default function EditStudent() {
 
     const { id } = useParams();
     const navigate = useNavigate();
-
+    const toast = useToast();
     
     const handleEdit = e => {
+      if(!(name || dob || phNo || department || room)){
+        navigate('/studentList');
+      }
 
-      e.preventDefault();
+      else{
+        e.preventDefault();
 
-      const editededStudent = {
-      name: name,
-      dob: dob,
-      phNo: phNo,
-      department: department,
-      room: room,
-      feeStatus: feeStatus == '0' ? false : true
-    }
+        const editededStudent = {
+        name: name,
+        dob: dob,
+        phNo: phNo,
+        department: department,
+        room: room,
+        feeStatus: feeStatus == '0' ? false : true
+      }
 
-    axios
+      axios
       .put(`http://localhost:8082/api/students/${id}`, editededStudent)
       .then((res) => {
         navigate(`/studentList`);
@@ -42,6 +46,16 @@ export default function EditStudent() {
         console.log('Error in UpdateBookInfo!');
       });
 
+      toast({
+        title: `${name}'s info updated.`,
+        status: 'info',
+        duration: 5000,
+        isClosable: true,
+      })
+
+      setTimeout(() => {navigate('/studentList')}, 9000);
+      }
+      
     }
 
     return (

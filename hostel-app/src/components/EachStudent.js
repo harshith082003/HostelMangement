@@ -1,7 +1,7 @@
 import React, {  useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {Box, Heading, Card, CardBody, CardHeader, Stack, StackDivider, Button, HStack, Spacer, Badge } from '@chakra-ui/react'
+import {Box, Heading, Card, CardBody, CardHeader, Stack, StackDivider, Button, HStack, useToast, Badge } from '@chakra-ui/react'
 import StudentField from './StudentField';
 import EditStudent from './EditStudent';
 
@@ -11,6 +11,7 @@ export default function EachStudent() {
 
     const { id } = useParams();
     const navigate = useNavigate();
+    const toast = useToast();
 
     useEffect(() => {
         axios
@@ -25,14 +26,33 @@ export default function EachStudent() {
 
 
       const handleVacate = (id) => {
-        axios
-          .delete(`http://localhost:8082/api/students/${id}`)
-          .then((res) => {
-            navigate('/studentList');
+        if(student.feeStatus == 1){
+          axios
+            .delete(`http://localhost:8082/api/students/${id}`)
+            .then((res) => {
+              navigate('/studentList');
+            })
+            .catch((err) => {
+              console.log('Error form ShowBookDetails_deleteClick');
+            });
+
+            toast({
+              title: `${student.name} vacated.`,
+              status: 'warning',
+              duration: 5000,
+              isClosable: true,
           })
-          .catch((err) => {
-            console.log('Error form ShowBookDetails_deleteClick');
-          });
+        }
+
+        else {
+          toast({
+            title: `Cannot vacate Student.`,
+            description: 'student fees still due',
+            status: 'warning',
+            duration: 5000,
+            isClosable: true,
+        })
+        }
       };
 
   return (
