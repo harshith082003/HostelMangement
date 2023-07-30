@@ -8,8 +8,6 @@ export default function StudentList() {
     
   const[students, setStudents] = useState([]);
 
-    
-
     useEffect(() => {
         axios
           .get('http://localhost:8082/api/students')

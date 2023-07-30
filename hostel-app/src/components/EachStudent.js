@@ -4,14 +4,14 @@ import axios from 'axios';
 import {Box, Heading, Card, CardBody, CardHeader, Stack, StackDivider, Button, HStack, useToast, Badge } from '@chakra-ui/react'
 import StudentField from './StudentField';
 import EditStudent from './EditStudent';
+import VacateAlert from './VacateAlert';
 
 export default function EachStudent() {
 
     const[student, setStudent] = useState({});
 
     const { id } = useParams();
-    const navigate = useNavigate();
-    const toast = useToast();
+    
 
     useEffect(() => {
         axios
@@ -25,36 +25,7 @@ export default function EachStudent() {
       }, [id]);
 
 
-      const handleVacate = (id) => {
-        if(student.feeStatus == 1){
-          axios
-            .delete(`http://localhost:8082/api/students/${id}`)
-            .then((res) => {
-              navigate('/studentList');
-            })
-            .catch((err) => {
-              console.log('Error form ShowBookDetails_deleteClick');
-            });
-
-            toast({
-              title: `${student.name} vacated.`,
-              status: 'warning',
-              duration: 5000,
-              isClosable: true,
-          })
-        }
-
-        else {
-          toast({
-            title: `Cannot vacate Student.`,
-            description: 'student fees still due',
-            status: 'warning',
-            duration: 5000,
-            isClosable: true,
-        })
-        }
-      };
-
+      
   return (
     <Box>
       <Card>
@@ -88,7 +59,8 @@ export default function EachStudent() {
       </Card>
       <HStack m={5}>
         <EditStudent/>
-        <Button colorScheme='red' marginLeft={10} onClick={() => handleVacate(student._id)}>Vacate</Button>
+        <VacateAlert student = {student} />
+
         <Link to={'/studentList'}>
           <Button colorScheme='red' marginLeft={10} variant={'outline'}>Close</Button>
         </Link>

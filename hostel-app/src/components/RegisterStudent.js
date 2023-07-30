@@ -48,6 +48,7 @@ export default function RegisterStudent() {
       });
 
       toast({
+        position: 'top',
         title: 'Student registered.',
         description: `Student allocated to room no ${room}.`,
         status: 'success',

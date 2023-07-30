@@ -47,6 +47,7 @@ export default function EditStudent() {
       });
 
       toast({
+        position: 'top',
         title: `${name}'s info updated.`,
         status: 'info',
         duration: 5000,
