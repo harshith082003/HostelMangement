@@ -61,7 +61,7 @@ export default function EachStudent() {
         <EditStudent/>
         <VacateAlert student = {student} />
 
-        <Link to={'/studentList'}>
+        <Link to={'/'}>
           <Button colorScheme='red' marginLeft={10} variant={'outline'}>Close</Button>
         </Link>
         

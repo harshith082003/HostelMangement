@@ -23,7 +23,7 @@ export default function VacateAlert({ student }) {
           axios
             .delete(`http://localhost:8082/api/students/${id}`)
             .then((res) => {
-              navigate('/studentList');
+              navigate('/');
             })
             .catch((err) => {
               console.log('Error form ShowBookDetails_deleteClick');

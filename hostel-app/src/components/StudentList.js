@@ -42,7 +42,7 @@ export default function StudentList() {
               }
             </Td>
             <Link to={`/eachStudent/${student._id}`}>
-            <Button colorScheme='teal' mt={5} mr={5}>View</Button>
+            <Button colorScheme='telegram' mt={5} mr={5}>View</Button>
             </Link> 
           </Tr>                    
           
@@ -76,7 +76,7 @@ export default function StudentList() {
         <Heading mt={500} fontSize={'6xl'}>
           LIST IS EMPTY
         </Heading>
-        <Link to={'/'}>
+        <Link to={'/register'}>
           <Center>
             <Button size={'lg'} colorScheme='green' m={5}>
               Register Student

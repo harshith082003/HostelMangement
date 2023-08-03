@@ -22,7 +22,7 @@ export default function EditStudent() {
     
     const handleEdit = e => {
       if(!(name || dob || phNo || department || room)){
-        navigate('/studentList');
+        navigate('/');
       }
 
       else{
@@ -54,7 +54,7 @@ export default function EditStudent() {
         isClosable: true,
       })
 
-      setTimeout(() => {navigate('/studentList')}, 9000);
+      setTimeout(() => {navigate('/')}, 500);
       }
       
     }
@@ -146,7 +146,7 @@ export default function EditStudent() {
                     </FormControl>
                     <RadioGroup defaultValue={feeStatus} onChange={setFeeStatus}>
                       <Stack spacing={5} direction='row'>
-                        <Radio colorScheme='red' value='0' onC>
+                        <Radio colorScheme='red' value='0'>
                           Due
                         </Radio>
                         <Radio colorScheme='green' value='1'>

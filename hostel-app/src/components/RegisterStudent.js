@@ -56,7 +56,7 @@ export default function RegisterStudent() {
         isClosable: true,
       })
 
-      setTimeout(navigate('/studentList'), 9000);      
+      setTimeout(() => {navigate('/')}, 500);
   }
 
   return (

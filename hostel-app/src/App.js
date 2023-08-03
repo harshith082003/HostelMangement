@@ -12,7 +12,7 @@ function App() {
     <Router>
       <Box >
         <Routes>
-          <Route exact path = '/studentList' element = {<StudentList/>}/>
+          <Route exact path = '/' element = {<StudentList/>}/>
           <Route path = '/register' element = {<RegisterStudent/>}/>
           <Route path = '/eachStudent/:id' element = {<EachStudent/>} />
           <Route path = '/editStudent/:id' element = {<EditStudent/>} />

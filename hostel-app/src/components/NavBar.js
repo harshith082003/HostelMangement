@@ -9,10 +9,10 @@ export default function NavBar() {
 
   return (
     <nav className='nav'>
-        <p className='site-title'>Hostel Manager</p>
+        <p className='site-title'>HostelPro</p>
         <ul>
             <li className={li1} onClick={() =>{ setLi1('active'); setLi2('')}}>
-              <Link to={'/studentList'}>
+              <Link to={'/'}>
                 <p>Student List</p>
               </Link>
             </li>
