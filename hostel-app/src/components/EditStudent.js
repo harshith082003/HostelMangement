@@ -40,7 +40,7 @@ export default function EditStudent() {
       axios
       .put(`http://localhost:8082/api/students/${id}`, editededStudent)
       .then((res) => {
-        navigate(`/studentList`);
+        navigate('/');
       })
       .catch((err) => {
         console.log('Error in UpdateBookInfo!');

@@ -5,7 +5,7 @@ const router = express.Router();
 const Student = require('../../models/Student');
 
 
-router.get('/test', (req, res) => res.send('Student route testing!'));
+// router.get('/test', (req, res) => res.send('Student route testing!'));
 
 router.get('/', (req, res) => {
   Student.find()
