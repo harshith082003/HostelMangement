@@ -4,7 +4,6 @@ import RegisterStudent from './components/RegisterStudent';
 import StudentList from "./components/StudentList";
 import EachStudent from "./components/EachStudent";
 import EditStudent from "./components/EditStudent";
-import NavBar from "./components/NavBar";
 
 
 function App() {

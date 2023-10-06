@@ -42,7 +42,7 @@ export default function StudentList() {
               }
             </Td>
             <Link to={`/eachStudent/${student._id}`}>
-            <Button colorScheme='telegram' mt={5} mr={5}>View</Button>
+              <Button colorScheme='telegram' mt={5} mr={5}>View</Button>
             </Link> 
           </Tr>                    
           
